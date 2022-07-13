@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sun.moon.mapper.DiscussPostMapper">
+
+    <select id="pageDiscuss" resultType="com.sun.moon.model.vo.DiscussPostVO">
+        SELECT
+			d.id,
+			d.user_id AS userId,
+			d.title,
+			d.content,
+			d.type,
+			d.`status`,
+			d.create_time AS createTime,
+			d.comment_count AS commentCount,
+			score ,
+			`user`.username AS userName,
+			`user`.header_url AS userHeaderUrl
+		FROM
+			discuss_post AS d
+		LEFT JOIN `user` ON d.user_id =`user`.id
+		 ${ew.customSqlSegment}
+
+    </select>
+</mapper>
